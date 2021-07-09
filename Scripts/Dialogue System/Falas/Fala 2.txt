@@ -1,0 +1,4 @@
+Loranje;
+Poderia pegar meu lápis e meu livro pra mim?;
+Claro;
+Não;

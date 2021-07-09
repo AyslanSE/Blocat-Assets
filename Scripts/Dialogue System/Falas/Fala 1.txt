@@ -1,0 +1,4 @@
+Loranje;
+A aula de hoje foi boa, né?;
+Foi sim;
+Não achei tão boa assim;

@@ -1,0 +1,4 @@
+Loranje;
+Agora pegue a chave;
+Ok;
+Não;
