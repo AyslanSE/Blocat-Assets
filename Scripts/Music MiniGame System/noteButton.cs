@@ -3,19 +3,23 @@ using UnityEngine.UI;
 
 public class noteButton : MonoBehaviour
 {
-    public MusicMiniGame musicController;
-    public float points, maxTimer;
-    public bool longButton;
+    //Variaveis gerais
+    public MusicMiniGame musicController; //controle da musica
+    public float points, maxTimer; // pontos da nota e tempo para destruir ela
+    public bool longButton; // slider ativo
 
-    private Slider slider;
-    protected float timer, timeSec = 0;
-    private bool clicking = false, interact = false;
+    private Slider slider; //slider do botao
+    protected float timer, timeSec = 0; //contador
+    private bool clicking = false, interact = false; //interação com a tecla
 
+    //Inicio do Script
     private void Start()
     {
         musicController = GameObject.Find("Canvas").GetComponent<MusicMiniGame>();
         slider = GetComponentInChildren<Slider>();
-        slider.gameObject.SetActive(longButton);
+
+        slider.gameObject.SetActive(longButton); //define se tem barra ou não
+        timeSec = 0; //reseta o timer
     }
 
     private void Update()
@@ -51,8 +55,11 @@ public class noteButton : MonoBehaviour
         else
             NoInteration();
 
-        if (clicking == false && interact == true)
+        if (clicking == false && interact == true) //desaparece botão
+        {
             this.gameObject.SetActive(false);
+            timeSec = 0; //reseta o timer
+        }
     }
 
     void NoInteration()
@@ -61,6 +68,7 @@ public class noteButton : MonoBehaviour
         {
             musicController.ButtonPressed(false, points);
             this.gameObject.SetActive(false);
+            timeSec = 0; //reseta o timer
         }
         else
         {
@@ -72,11 +80,9 @@ public class noteButton : MonoBehaviour
                 timer = 0;
             }
         }
-        Debug.Log(timeSec - maxTimer);
-
     }
 
-    public void Click(bool clickState)
+    public void Click(bool clickState) //Jogador apertou o botão
     {
         clicking = clickState;
         interact = true;

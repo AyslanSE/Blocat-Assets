@@ -2,17 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MusicMiniGame : MonoBehaviour
 {
-    // =========== Variaveis Serializaveis ===========
-    [SerializeField] protected GameObject[] botao;
-    [SerializeField] public float[] minTimer;
+    // =========== Variaveis Alteraveis na Unity ===========
+    public GameObject[] botao;
 
-    [SerializeField] protected Text acerts, startButton;
-    [SerializeField] protected Slider barProgress;
-    [SerializeField] protected Slider punctuation;
+    [SerializeField] private Text acerts, startButton;
+    [SerializeField] private Slider barProgress;
+    [SerializeField] private Slider punctuation;
+    [SerializeField] private AudioSource audio;
 
-    // ============== Variaveis privadas =============
-    private Animator animText;
-   // private AudioSource audio;
+    // ========== Variaveis não Alteraveis ============
+    public float[] minTimer;
 
     protected float timer, timeSec = 0, acertos;
     protected bool inMusic = false, correct = true;
@@ -23,9 +22,9 @@ public class MusicMiniGame : MonoBehaviour
     private void Start() //Configurar componentes iniciais
     {
         startButton = GameObject.Find("StartText").GetComponent<Text>();
-        animText = GetComponent<Animator>();
- //       audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
+
     private void AddButton() //Adiciona Botão
     {
         if (nota < botao.Length)
@@ -59,8 +58,8 @@ public class MusicMiniGame : MonoBehaviour
 
             // ================== Controle de Audio ==================
 
- //           if (!audio.isPlaying) //Começa a tocar a musica
- //               audio.Play();
+            if (!audio.isPlaying) //Começa a tocar a musica
+                audio.Play();
 
             if (correct == false) //errou a nota
             {
@@ -75,11 +74,11 @@ public class MusicMiniGame : MonoBehaviour
 
                 if (timeSec > 0.25f)
                 {
-  //                  audio.volume = 1; //aumenta audio
+                    audio.volume = 1; //aumenta audio
                     correct = true;
                 }
-   //             else
-   //                 audio.volume = 0.25f; //diminui audio
+                else
+                    audio.volume = 0.25f; //diminui audio
             }
             //========================================================
 
@@ -96,7 +95,7 @@ public class MusicMiniGame : MonoBehaviour
             timeSec = 0;
             timer = 0;
             nota = 0;
-  //          audio.Stop();
+            audio.Stop();
         }
     }
 
